@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Settings — Aizeeno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px"><a href="../index.html" class="logo">Aizeeno</a></div>
+    <div><a href="#" id="logoutTop" style="text-decoration:none;color:var(--text)">Logout</a></div>
+  </div>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <a href="../about.html">About Us</a>
+        <a href="../subscription.html">Subscription</a>
+        <a href="../feedback.html">Feedback</a>
+        <a href="settings.html" style="font-weight:600;background:rgba(255,255,255,0.02)">Setting</a>
+        <a href="#account">Account</a>
+        <a href="../terms.html">Terms Policy</a>
+      </nav>
+      <div class="version">V.1.0.0.0</div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <div class="container">
+        <h2>Settings</h2>
+
+        <div class="card">
+          <h3>Profile</h3>
+          <p class="muted">Edit your display name for the device.</p>
+          <div style="margin-top:12px">
+            <label for="displayName">Display name</label>
+            <input id="displayName" />
+            <div style="height:12px"></div>
+            <button id="saveProfile" class="btn">Save</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Subscription & Payment</h3>
+          <p class="muted">Manage your subscription and payment method.</p>
+          <div style="margin-top:12px">
+            <a href="../subscription.html" class="btn">Go to subscription</a>
+          </div>
+        </div>
+
+        <div class="card" id="account">
+          <h3>Account</h3>
+          <p class="muted">Your account is stored on this device only (local).</p>
+          <div style="margin-top:12px">
+            <div style="margin-bottom:12px">
+              <label for="currentPass">Current password</label>
+              <input id="currentPass" type="password" />
+              <label for="newPass">New password</label>
+              <input id="newPass" type="password" />
+              <button id="changePass" class="btn" style="margin-top:10px">Change password</button>
+            </div>
+            <button id="removeAccount" class="btn" style="background:#b00020">Remove local account</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Load local user
+    const raw = localStorage.getItem('aizeeno_user');
+    if (!raw) { /* if not logged in redirect to login */ location.href = '../auth/login.html'; }
+    const user = JSON.parse(raw || '{}');
+    document.getElementById('displayName').value = user.name || user.username || '';
+
+    async function apiPost(path, body){
+      try{
+        const r = await fetch(path, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+        return await r.json();
+      } catch(e){ return { success: false, error: 'Network error' }; }
+    }
+
+    document.getElementById('saveProfile').addEventListener('click', async ()=>{
+      const newName = document.getElementById('displayName').value || user.username;
+      const updates = { name: newName };
+      const res = await apiPost('/api/auth/update', { username: user.username, updates });
+      if (res && res.success){
+        const updated = { ...user, name: newName };
+        localStorage.setItem('aizeeno_user', JSON.stringify(updated));
+        alert('Profile updated');
+      } else {
+        alert('Update failed: ' + (res.error || 'unknown'));
+      }
+    });
+
+    // change password UI: add prompt
+    document.getElementById('changePass').addEventListener('click', async ()=>{
+      const current = document.getElementById('currentPass').value;
+      const neu = document.getElementById('newPass').value;
+      if (!current || !neu){ alert('Please fill both fields'); return; }
+      const res = await apiPost('/api/auth/change_password', { username: user.username, current, new: neu });
+      if (res && res.success){ alert('Password changed'); document.getElementById('currentPass').value=''; document.getElementById('newPass').value=''; }
+      else { alert('Change failed: ' + (res.error||'unknown')); }
+    });
+
+    document.getElementById('removeAccount').addEventListener('click', async ()=>{
+      if (!confirm('Remove local account data? This will sign you out on this device.')) return;
+      localStorage.removeItem('aizeeno_user');
+      alert('Local account removed.');
+      location.href = '../auth/login.html';
+    });
+
+    document.getElementById('logoutTop').addEventListener('click', (e)=>{ e.preventDefault(); localStorage.removeItem('aizeeno_user'); location.href = '../auth/login.html'; });
+  </script>
+</body>
+</html>

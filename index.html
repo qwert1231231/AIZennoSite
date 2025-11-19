@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aizeeno — Home</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --text: #0a0a0a;
+      --muted: #555;
+      --bg: #ffffff;
+      --accent: #111;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 64px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    header .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 16px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    main {
+      margin-top: 120px;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 72px;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin: 0 auto 20px;
+      max-width: 900px;
+      font-weight: 700;
+    }
+
+    p.lead {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* removed rainbow ring animation for buttons to keep UI simple */
+    .btn:hover { transform: scale(1.03); }
+
+    section.features {
+      margin-top: 120px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      max-width: 1000px;
+      margin-inline: auto;
+    }
+
+    .feature {
+      border: 1px solid #eaeaea;
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      background: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 100px;
+      padding: 60px 0;
+      border-top: 1px solid #eee;
+    }
+
+    @media (max-width: 800px) {
+      h1 { font-size: 48px; }
+      header { padding: 16px 32px; }
+      nav a { margin: 0 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="logo">Aizeeno</a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div id="userArea" style="display:flex;align-items:center;gap:12px"></div>
+  </header>
+
+  <main>
+    <h1>The future of simple AI interaction</h1>
+    <p class="lead">
+      A lightweight chat platform designed to be clean, responsive, and fast — just the essentials, no clutter.
+    </p>
+    <button class="btn" id="getStarted"><span>Get Started</span></button>
+
+    <section class="features" id="features">
+      <div class="feature">
+        <h3>Smart Replies</h3>
+        <p>Send a message and get an intelligent, instant answer.</p>
+      </div>
+      <div class="feature">
+        <h3>Math & Logic</h3>
+        <p>Do quick calculations and solve problems effortlessly.</p>
+      </div>
+      <div class="feature">
+        <h3>Simple Design</h3>
+        <p>Just clean black-and-white UI with smooth animations.</p>
+      </div>
+    </section>
+
+    <footer>© 2025 Aizeeno. Built with simplicity in mind.</footer>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // show logged-in user in header if available
+    (function(){
+      const userArea = document.getElementById('userArea');
+      if (!userArea) return;
+      const raw = localStorage.getItem('aizeeno_user');
+      if (!raw){
+        const btn = document.createElement('button');
+        btn.textContent = 'Sign in';
+        btn.className = 'btn';
+        btn.style.padding='8px 12px';
+        btn.addEventListener('click', ()=> location.href = 'auth/login.html');
+        userArea.appendChild(btn);
+        return;
+      }
+      try{
+        const user = JSON.parse(raw);
+        const wrap = document.createElement('div');
+        wrap.style.display='flex'; wrap.style.alignItems='center'; wrap.style.gap='10px';
+        const avatar = document.createElement('div');
+        avatar.style.width='36px'; avatar.style.height='36px'; avatar.style.borderRadius='8px'; avatar.style.background='#000';
+        avatar.style.flex='0 0 36px';
+        const name = document.createElement('div');
+        name.style.fontSize='14px'; name.style.fontWeight='600'; name.textContent = user.name || user.username;
+        const menuBtn = document.createElement('button');
+        menuBtn.textContent = '▾'; menuBtn.style.background='transparent'; menuBtn.style.border='none'; menuBtn.style.cursor='pointer';
+        const dropdown = document.createElement('div');
+        dropdown.style.position='absolute'; dropdown.style.right='24px'; dropdown.style.top='68px'; dropdown.style.background='#fff'; dropdown.style.border='1px solid #eee'; dropdown.style.padding='8px'; dropdown.style.display='none'; dropdown.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'; dropdown.style.borderRadius='8px';
+        const settingsLink = document.createElement('a'); settingsLink.href='setting/settings.html'; settingsLink.textContent='Settings'; settingsLink.style.display='block'; settingsLink.style.padding='6px 10px';
+        const logoutLink = document.createElement('a'); logoutLink.href='#'; logoutLink.textContent='Logout'; logoutLink.style.display='block'; logoutLink.style.padding='6px 10px';
+        logoutLink.addEventListener('click', (e)=>{ e.preventDefault(); localStorage.removeItem('aizeeno_user'); location.reload(); });
+        dropdown.appendChild(settingsLink); dropdown.appendChild(logoutLink);
+        menuBtn.addEventListener('click', ()=>{ dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none'; });
+        wrap.appendChild(avatar); wrap.appendChild(name); wrap.appendChild(menuBtn);
+        userArea.appendChild(wrap); document.body.appendChild(dropdown);
+      }catch(e){ console.warn(e); }
+    })();
+  </script>
+</body>
+</html>

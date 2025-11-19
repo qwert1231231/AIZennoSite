@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Auth System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", sans-serif; }
+    body { background: #ffffff; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+    .container { width: 380px; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); animation: floatUp 0.8s ease forwards; }
+    @keyframes floatUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    h2 { text-align: center; margin-bottom: 20px; color: #333; }
+    .input-group { margin-bottom: 15px; }
+    .input-group label { font-size: 14px; margin-bottom: 5px; display: block; color: #444; }
+    .input-group input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; transition: 0.2s; }
+    .input-group input:focus { border-color: #6b00d6; }
+    .checkbox { display: flex; align-items: center; margin-bottom: 15px; font-size: 14px; }
+    .checkbox input { margin-right: 8px; }
+    button { width: 100%; padding: 12px; background: #000000; color: #fff; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; transition: 0.3s; }
+    button:hover { background: #222222; }
+    .switch { text-align: center; margin-top: 15px; color: #333; cursor: pointer; }
+    .switch:hover { text-decoration: underline; }
+    .hidden { display: none; }
+    .row { display:flex; gap:12px; width:100%; }
+    .row .input-group { flex:1; }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="signupBox">
+    <h2>Sign Up</h2>
+
+    <div class="row">
+      <div class="input-group">
+        <label>First Name</label>
+        <input type="text" id="firstName" />
+      </div>
+      <div class="input-group">
+        <label>Last Name</label>
+        <input type="text" id="lastName" />
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Username</label>
+      <input type="text" id="username" />
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="email" />
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="password" />
+    </div>
+
+    <div class="checkbox">
+      <input type="checkbox" id="terms" /> I agree to the terms
+    </div>
+
+    <button id="signupBtn">Create Account</button>
+
+    <div class="switch" id="toLogin">Already have an account? Login</div>
+  </div>
+
+
+  <div class="container hidden" id="loginBox">
+    <h2>Login</h2>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="loginEmail" />
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword" />
+    </div>
+
+    <button id="loginBtn">Login</button>
+
+    <div class="switch" id="toSignup">Don't have an account? Sign Up</div>
+  </div>
+
+  <script type="module" src="/auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "username": "alice",
+      "password": "d033e22ae348aeb5660fc2140aec35850c4da997",
+      "name": "Alice"
+    },
+    {
+      "username": "GIRLISH020",
+      "password": "5d70c3d101efd9cc0a69f4df2ddf33b21e641f6a",
+      "name": "Aizenno"
+    },
+    {
+      "username": "liom",
+      "password": "5405737715ca693f05d7598ed346a93067133673",
+      "name": "Liom"
+    },
+    {
+      "username": "Liom",
+      "password": "e968bda9aebde6fe659ee521d78758786edb8e38ddb6fa09b8370e0983e8aa0f",
+      "salt": "df423d8df859a2ed86cf38e01cadd3e1",
+      "name": "Liom",
+      "email": "ilyasslamini5@gmail.com"
+    },
+    {
+      "username": "xx",
+      "password": "544fff0c83cd247323a0f250be909eea259c8e22be84229b6902c06f7781bd01",
+      "salt": "e36534ebff94ce477d6ffbf14174683e",
+      "name": "Liom",
+      "email": "ilyasslamini11@gmail.com"
+    },
+    {
+      "username": "x",
+      "password": "5966bbf46fe9d8a8f6bb6633f853ba1f22802a6b694ef5a13d3f1041bba2ae49",
+      "salt": "1970db15fcb50f4c82477867d7d3aea1",
+      "name": "Liom",
+      "email": "ilyasslamini11@gmail.com"
+    },
+    {
+      "username": "b",
+      "password": "294da7ac42a4645a6374dd7ee84fb8cfe98a3c95caf7945acf0262f757b357f4",
+      "salt": "9e01b9a042a8df19daf1475f903d7e14",
+      "name": "Liom Lamini",
+      "email": "ilyasslamini5@gmail.com"
+    }
+  ]
+}

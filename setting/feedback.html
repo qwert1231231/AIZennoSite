@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Feedback — Aizeeno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topbar">
+    <a class="logo" href="index.html">Aizeeno</a>
+    <div></div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <nav>
+        <a href="about.html">About Us</a>
+        <a href="subscription.html">Subscription</a>
+        <a href="feedback.html" style="font-weight:600;background:rgba(255,255,255,0.02)">Feedback</a>
+        <a href="setting/settings.html">Setting</a>
+        <a href="#account">Account</a>
+        <a href="terms.html">Terms Policy</a>
+      </nav>
+      <div class="version">V.1.0.0.0</div>
+    </aside>
+
+    <main class="main">
+      <div class="container">
+        <div class="card">
+          <h2>Feedback</h2>
+          <p class="muted">We appreciate your feedback — it helps us improve Aizeeno.</p>
+          <form id="feedbackForm" style="margin-top:12px">
+            <label for="fb-subject">Subject</label>
+            <input id="fb-subject" class="input" />
+            <label for="fb-message" style="margin-top:8px">Message</label>
+            <textarea id="fb-message" class="input" rows="6" style="resize:vertical;margin-top:6px"></textarea>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <button type="submit" class="btn">Send Feedback</button>
+              <div class="muted">We will not share your email without permission.</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('feedbackForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      alert('Thanks for the feedback — sending to admin (demo).');
+      document.getElementById('fb-subject').value=''; document.getElementById('fb-message').value='';
+    });
+  </script>
+</body>
+</html>
