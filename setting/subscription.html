@@ -1,87 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AI Chat Assistant - Subscription Plans</title>
-        <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upgrade Your AIZenno Experience</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #000000; /* All text black */
+      overflow-x: hidden;
+    }
+
+    a {
+      color: #0073e6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Background Music Note Animation */
+    .music-note {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: floatNotes 6s linear infinite;
+      color: #000000; /* Notes black */
+    }
+    @keyframes floatNotes {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    /* Title */
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #000000; /* Title black */
+      text-shadow: none;
+    }
+    p.subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 50px;
+      color: #000000; /* Subtitle black */
+    }
+
+    /* Subscription Cards */
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: linear-gradient(145deg, #f1f1f1, #e0e0e0);
+      border-radius: 20px;
+      padding: 30px 20px;
+      width: 280px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #000000; /* Card title black */
+    }
+    .card p.price {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+      color: #000000; /* Price black */
+    }
+    .card ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+      text-align: left;
+      color: #000000; /* Feature text black */
+    }
+    .card ul li {
+      margin-bottom: 12px;
+      padding-left: 20px;
+      position: relative;
+    }
+    .card ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #000000; /* Tick black */
+    }
+
+    .card button {
+      background: #000000;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      padding: 12px 25px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .card button:hover {
+      background: #333333;
+      color: #fff;
+    }
+
+    /* Pop Vibe Animations */
+    .note {
+      position: absolute;
+      font-size: 18px;
+      animation: float 6s linear infinite;
+      color: #000000;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(400px) rotate(360deg); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-        <div class="topbar">
-            <a class="logo" href="index.html">AI Assistant</a>
-            <div style="display:flex;gap:12px;align-items:center">
-                <a href="index.html" style="color:var(--muted);text-decoration:none">Home</a>
-                <a href="chat/chat.html" style="color:var(--muted);text-decoration:none">Chat</a>
-                <a href="subscription.html" style="color:var(--text);text-decoration:none;font-weight:700">Pricing</a>
-                <a href="auth/login.html" style="color:var(--muted);text-decoration:none">Login</a>
-            </div>
-        </div>
 
-        <main class="container">
-            <section class="pricing-hero">
-                <h1>Choose Your Plan</h1>
-                <p>Get unlimited access to advanced AI features</p>
-            </section>
+  <!-- Floating Music Notes -->
+  <div class="music-note" style="left:10%;">♪</div>
+  <div class="music-note" style="left:30%; animation-delay: 2s;">♫</div>
+  <div class="music-note" style="left:50%; animation-delay: 1s;">♬</div>
+  <div class="music-note" style="left:70%; animation-delay: 3s;">♪</div>
+  <div class="music-note" style="left:90%; animation-delay: 1.5s;">♫</div>
 
-            <section class="pricing-grid">
-                <div class="price-card card">
-                    <div class="plan-header">
-                        <h3>Basic</h3>
-                        <div class="price"><span class="amount">$9.99</span><span class="period">/month</span></div>
-                    </div>
-                    <ul class="features-list">
-                        <li>100 messages per day</li>
-                        <li>Basic AI model</li>
-                        <li>Standard response time</li>
-                        <li>Email support</li>
-                    </ul>
-                    <button class="subscribe-btn">Get Started</button>
-                </div>
+  <div class="container">
+    <h1>Level Up Your AIZenno Experience</h1>
+    <p class="subtitle">Unlock advanced features and get the best out of your AI assistant with our premium plans.</p>
 
-                <div class="price-card featured card">
-                    <div class="plan-header">
-                        <div class="popular-tag">Most Popular</div>
-                        <h3>Pro</h3>
-                        <div class="price"><span class="amount">$19.99</span><span class="period">/month</span></div>
-                    </div>
-                    <ul class="features-list">
-                        <li>Unlimited messages</li>
-                        <li>Advanced AI model</li>
-                        <li>Priority response time</li>
-                        <li>Priority support</li>
-                        <li>Custom AI personality</li>
-                    </ul>
-                    <button class="subscribe-btn featured">Get Pro Access</button>
-                </div>
+    <div class="cards">
+      <!-- Tier 1 -->
+      <div class="card">
+        <h2>Starter</h2>
+        <p class="price">$5 / month</p>
+        <ul>
+          <li>Basic AI responses</li>
+          <li>Limited daily usage</li>
+          <li>Email support</li>
+        </ul>
+        <button>Subscribe Now</button>
+      </div>
 
-                <div class="price-card card">
-                    <div class="plan-header">
-                        <h3>Enterprise</h3>
-                        <div class="price"><span class="amount">Custom</span></div>
-                    </div>
-                    <ul class="features-list">
-                        <li>Custom message volume</li>
-                        <li>Custom AI model</li>
-                        <li>Dedicated support</li>
-                        <li>API access</li>
-                        <li>Custom integration</li>
-                    </ul>
-                    <button class="subscribe-btn">Contact Sales</button>
-                </div>
-            </section>
+      <!-- Tier 2 -->
+      <div class="card">
+        <h2>Pro</h2>
+        <p class="price">$10 / month</p>
+        <ul>
+          <li>Advanced AI responses</li>
+          <li>Extended daily usage</li>
+          <li>Priority email support</li>
+          <li>Access to exclusive features</li>
+        </ul>
+        <button>Subscribe Now</button>
+      </div>
 
-            <section class="faq-section">
-                <h2>Frequently Asked Questions</h2>
-                <div class="faq-grid"></div>
-            </section>
-        </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 AI Assistant. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+      <!-- Tier 3 -->
+      <div class="card">
+        <h2>Elite</h2>
+        <p class="price">$29.99 / month</p>
+        <ul>
+          <li>Unlimited AI responses</li>
+          <li>Priority 24/7 support</li>
+          <li>Early access to new features</li>
+          <li>Personalized AI customization</li>
+          <li>VIP community access</li>
+        </ul>
+        <button>Subscribe Now</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -42,6 +42,13 @@
       "salt": "9e01b9a042a8df19daf1475f903d7e14",
       "name": "Liom Lamini",
       "email": "ilyasslamini5@gmail.com"
+    },
+    {
+      "username": "Liom1",
+      "password": "fe681491213aa30071fb24931b7763cff33ecd43ffc93879c7c0d19e820961f8",
+      "salt": "5100e3a68162052c0c5f4ffa1dc5f6e7",
+      "name": "Liom Lamini",
+      "email": "ilyasslamini5@gmail.com"
     }
   ]
 }
