@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aizeeno — Home</title>
+  <title>AiZenno — Home</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
   <style>
     :root {
@@ -39,6 +39,15 @@
       z-index: 1000;
       border-bottom: 1px solid #e5e5e5;
     }
+
+    /* User menu styles */
+    .user-wrap { position: relative; display:flex; align-items:center; gap:10px; }
+    .user-avatar { width:40px; height:40px; border-radius:10px; background:#000; flex:0 0 40px; }
+    .user-name { font-size:14px; font-weight:600; }
+    .user-menu { position: absolute; right: 0; top: calc(100% + 12px); background: #fff; border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-radius: 10px; min-width:180px; overflow:hidden; z-index:1500; }
+    .user-menu .item { display:block; padding:10px 14px; color:var(--text); text-decoration:none; border-bottom:1px solid #f2f2f2; }
+    .user-menu .item:hover { background:#f6f6f6; }
+    .user-menu .logout { color:#b00020; font-weight:600; }
 
     header .logo {
       font-size: 22px;
@@ -145,7 +154,7 @@
 </head>
 <body>
   <header>
-    <a href="#" class="logo">Aizeeno</a>
+    <a href="#" class="logo">AiZenno</a>
     <nav>
       <a href="#features">Features</a>
       <a href="#about">About</a>
@@ -176,7 +185,7 @@
       </div>
     </section>
 
-    <footer>© 2025 Aizeeno. Built with simplicity in mind.</footer>
+    <footer>© 2025 AiZenno. Built with simplicity in mind.</footer>
   </main>
 
   <script src="script.js"></script>
@@ -198,24 +207,52 @@
       try{
         const user = JSON.parse(raw);
         const wrap = document.createElement('div');
-        wrap.style.display='flex'; wrap.style.alignItems='center'; wrap.style.gap='10px';
+        wrap.className = 'user-wrap';
+
         const avatar = document.createElement('div');
-        avatar.style.width='36px'; avatar.style.height='36px'; avatar.style.borderRadius='8px'; avatar.style.background='#000';
-        avatar.style.flex='0 0 36px';
+        avatar.className = 'user-avatar';
+        // if user has a saved photo (data URL), use it
+        if (user.photo){
+          avatar.style.backgroundImage = `url(${user.photo})`;
+          avatar.style.backgroundSize = 'cover';
+          avatar.style.backgroundPosition = 'center';
+        }
+
         const name = document.createElement('div');
-        name.style.fontSize='14px'; name.style.fontWeight='600'; name.textContent = user.name || user.username;
-        const menuBtn = document.createElement('button');
-        menuBtn.textContent = '▾'; menuBtn.style.background='transparent'; menuBtn.style.border='none'; menuBtn.style.cursor='pointer';
-        const dropdown = document.createElement('div');
-        dropdown.style.position='absolute'; dropdown.style.right='24px'; dropdown.style.top='68px'; dropdown.style.background='#fff'; dropdown.style.border='1px solid #eee'; dropdown.style.padding='8px'; dropdown.style.display='none'; dropdown.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'; dropdown.style.borderRadius='8px';
-        const settingsLink = document.createElement('a'); settingsLink.href='setting/settings.html'; settingsLink.textContent='Settings'; settingsLink.style.display='block'; settingsLink.style.padding='6px 10px';
-        const logoutLink = document.createElement('a'); logoutLink.href='#'; logoutLink.textContent='Logout'; logoutLink.style.display='block'; logoutLink.style.padding='6px 10px';
+        name.className = 'user-name'; name.textContent = user.name || user.username;
+
+        const toggle = document.createElement('button');
+        toggle.className = 'btn'; toggle.style.padding = '6px 8px'; toggle.style.fontSize='14px'; toggle.textContent = '▾';
+
+        const menu = document.createElement('div');
+        menu.className = 'user-menu'; menu.style.display = 'none';
+
+        const linkSettings = document.createElement('a'); linkSettings.href = 'setting/settings.html'; linkSettings.className = 'item'; linkSettings.textContent = 'Settings';
+        const linkSubscription = document.createElement('a'); linkSubscription.href = 'subscription.html'; linkSubscription.className = 'item'; linkSubscription.textContent = 'Subscription';
+        const linkChat = document.createElement('a'); linkChat.href = 'chat/chat.html'; linkChat.className = 'item'; linkChat.textContent = 'Chat';
+        const logoutLink = document.createElement('a'); logoutLink.href = '#'; logoutLink.className = 'item logout'; logoutLink.textContent = 'Logout';
         logoutLink.addEventListener('click', (e)=>{ e.preventDefault(); localStorage.removeItem('aizeeno_user'); location.reload(); });
-        dropdown.appendChild(settingsLink); dropdown.appendChild(logoutLink);
-        menuBtn.addEventListener('click', ()=>{ dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none'; });
-        wrap.appendChild(avatar); wrap.appendChild(name); wrap.appendChild(menuBtn);
-        userArea.appendChild(wrap); document.body.appendChild(dropdown);
-      }catch(e){ console.warn(e); }
+
+        menu.appendChild(linkSettings);
+        menu.appendChild(linkSubscription);
+        menu.appendChild(linkChat);
+        menu.appendChild(logoutLink);
+
+        toggle.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // hide menu when clicking outside
+        document.addEventListener('click', ()=> { if (menu) menu.style.display = 'none'; });
+
+        wrap.appendChild(avatar);
+        wrap.appendChild(name);
+        wrap.appendChild(toggle);
+        userArea.appendChild(wrap);
+        // place menu as child of wrap so positioning is correct
+        wrap.appendChild(menu);
+      } catch(e){ console.warn(e); }
     })();
   </script>
 </body>
