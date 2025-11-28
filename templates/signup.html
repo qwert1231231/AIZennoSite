@@ -19,8 +19,8 @@
     .checkbox input { margin-right: 8px; }
     button { width: 100%; padding: 12px; background: #000000; color: #fff; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; transition: 0.3s; }
     button:hover { background: #222222; }
-    .switch { text-align: center; margin-top: 15px; color: #333; cursor: pointer; }
-    .switch:hover { text-decoration: underline; }
+    .switch { text-align: center; margin-top: 25px; color: #999; cursor: pointer; font-size: 12px; transition: 0.2s; }
+    .switch:hover { color: #0073e6; text-decoration: underline; }
     .hidden { display: none; }
     .row { display:flex; gap:12px; width:100%; }
     .row .input-group { flex:1; }
@@ -63,8 +63,8 @@
 
     <button id="signupBtn">Create Account</button>
 
-    <a class="switch" href="login.html">Already have an account? Login</a>
-    <div style="margin-top:8px;font-size:12px;color:#666;text-align:center">By creating an account you agree to AiZenno's <a href="/setting/terms.html">Terms & Policy</a>.</div>
+    <a class="switch" href="/templates/login.html">Already have an account? Sign In</a>
+    <div style="margin-top:8px;font-size:12px;color:#666;text-align:center">By creating an account you agree to AiZenno's <a href="/templates/terms.html">Terms & Policy</a>.</div>
   </div>
 
 
@@ -81,12 +81,12 @@
       <input type="password" id="loginPassword" />
     </div>
 
-    <button id="loginBtn">Login</button>
+    <button id="loginBtn">Sign In</button>
 
     <div class="switch" id="toSignup">Don't have an account? Sign Up</div>
   </div>
 
-  <script type="module" src="/auth.js"></script>
+  <script src="/static/auth.js"></script>
 
 </body>
 </html>

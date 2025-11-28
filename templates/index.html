@@ -15,7 +15,6 @@
     }
 
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       background: var(--bg);
@@ -49,25 +48,9 @@
     .user-menu .item:hover { background:#f6f6f6; }
     .user-menu .logout { color:#b00020; font-weight:600; }
 
-    header .logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      margin: 0 16px;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    nav a:hover {
-      color: var(--text);
-    }
+    header .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); text-decoration: none; }
+    nav a { color: var(--muted); text-decoration: none; margin: 0 16px; font-weight: 500; transition: color 0.2s ease; }
+    nav a:hover { color: var(--text); }
 
     main {
       margin-top: 120px;
@@ -75,21 +58,8 @@
       text-align: center;
     }
 
-    h1 {
-      font-size: 72px;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin: 0 auto 20px;
-      max-width: 900px;
-      font-weight: 700;
-    }
-
-    p.lead {
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 700px;
-      margin: 0 auto 40px;
-    }
+    h1 { font-size: 72px; line-height: 1.05; letter-spacing: -2px; margin: 0 auto 20px; max-width: 900px; font-weight: 700; }
+    p.lead { font-size: 18px; color: var(--muted); max-width: 700px; margin: 0 auto 40px; }
 
     .btn {
       display: inline-block;
@@ -105,13 +75,7 @@
       position: relative;
       overflow: hidden;
     }
-
-    .btn span {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* removed rainbow ring animation for buttons to keep UI simple */
+    .btn span { position: relative; z-index: 2; }
     .btn:hover { transform: scale(1.03); }
 
     section.features {
@@ -130,20 +94,9 @@
       background: #fff;
       transition: all 0.3s ease;
     }
+    .feature:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.05); }
 
-    .feature:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-    }
-
-    footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 100px;
-      padding: 60px 0;
-      border-top: 1px solid #eee;
-    }
+    footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 100px; padding: 60px 0; border-top: 1px solid #eee; }
 
     @media (max-width: 800px) {
       h1 { font-size: 48px; }
@@ -154,7 +107,7 @@
 </head>
 <body>
   <header>
-    <a href="#" class="logo">AiZenno</a>
+    <a href="/templates/index.html" class="logo">AiZenno</a>
     <nav>
       <a href="#features">Features</a>
       <a href="#about">About</a>
@@ -188,7 +141,7 @@
     <footer>© 2025 AiZenno. Built with simplicity in mind.</footer>
   </main>
 
-  <script src="script.js"></script>
+  <script src="/static/script.js"></script>
   <script>
     // show logged-in user in header if available
     (function(){
@@ -200,7 +153,7 @@
         btn.textContent = 'Sign in';
         btn.className = 'btn';
         btn.style.padding='8px 12px';
-        btn.addEventListener('click', ()=> location.href = 'auth/login.html');
+        btn.addEventListener('click', ()=> location.href = '/templates/login.html');
         userArea.appendChild(btn);
         return;
       }
@@ -211,15 +164,13 @@
 
         const avatar = document.createElement('div');
         avatar.className = 'user-avatar';
-        // if user has a saved photo (data URL), use it
         if (user.photo){
           avatar.style.backgroundImage = `url(${user.photo})`;
           avatar.style.backgroundSize = 'cover';
           avatar.style.backgroundPosition = 'center';
         }
 
-        const name = document.createElement('div');
-        name.className = 'user-name'; name.textContent = user.name || user.username;
+        const name = document.createElement('div'); name.className = 'user-name'; name.textContent = user.name || user.username;
 
         const toggle = document.createElement('button');
         toggle.className = 'btn'; toggle.style.padding = '6px 8px'; toggle.style.fontSize='14px'; toggle.textContent = '▾';
@@ -227,9 +178,9 @@
         const menu = document.createElement('div');
         menu.className = 'user-menu'; menu.style.display = 'none';
 
-        const linkSettings = document.createElement('a'); linkSettings.href = 'setting/settings.html'; linkSettings.className = 'item'; linkSettings.textContent = 'Settings';
-        const linkSubscription = document.createElement('a'); linkSubscription.href = 'subscription.html'; linkSubscription.className = 'item'; linkSubscription.textContent = 'Subscription';
-        const linkChat = document.createElement('a'); linkChat.href = 'chat/chat.html'; linkChat.className = 'item'; linkChat.textContent = 'Chat';
+        const linkSettings = document.createElement('a'); linkSettings.href = '/templates/settings.html'; linkSettings.className = 'item'; linkSettings.textContent = 'Settings';
+        const linkSubscription = document.createElement('a'); linkSubscription.href = '/templates/subscription.html'; linkSubscription.className = 'item'; linkSubscription.textContent = 'Subscription';
+        const linkChat = document.createElement('a'); linkChat.href = '/templates/chat.html'; linkChat.className = 'item'; linkChat.textContent = 'Chat';
         const logoutLink = document.createElement('a'); logoutLink.href = '#'; logoutLink.className = 'item logout'; logoutLink.textContent = 'Logout';
         logoutLink.addEventListener('click', (e)=>{ e.preventDefault(); localStorage.removeItem('aizeeno_user'); location.reload(); });
 
@@ -243,14 +194,12 @@
           menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
         });
 
-        // hide menu when clicking outside
         document.addEventListener('click', ()=> { if (menu) menu.style.display = 'none'; });
 
         wrap.appendChild(avatar);
         wrap.appendChild(name);
         wrap.appendChild(toggle);
         userArea.appendChild(wrap);
-        // place menu as child of wrap so positioning is correct
         wrap.appendChild(menu);
       } catch(e){ console.warn(e); }
     })();

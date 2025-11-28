@@ -98,21 +98,21 @@
 </head>
 <body>
   <!-- Topbar -->
-  <div class="topbar">
-    <a href="../index.html" class="logo">Aizeeno</a>
-    <a href="#" id="logoutTop">Logout</a>
+   <div class="topbar">
+     <a href="/" class="logo">Aizeeno</a>
+     <a href="#" id="logoutTop">Logout</a>
   </div>
 
   <div class="layout">
     <!-- Sidebar -->
     <aside class="sidebar">
       <nav>
-        <a href="/setting/about.html">About Us</a>
-        <a href="/setting/subscription.html">Subscription</a>
-        <a href="/setting/feedback.html">Feedback</a>
-        <a href="settings.html" class="active">Settings</a>
-        <a href="#account">Account</a>
-        <a href="/setting/terms.html">Terms & Policy</a>
+        <a href="/templates/about.html">About Us</a>
+        <a href="/templates/subscription.html">Subscription</a>
+        <a href="/templates/feedback.html">Feedback</a>
+        <a href="/templates/settings.html" class="active">Settings</a>
+         <a href="#account">Account</a>
+        <a href="/templates/terms.html">Terms & Policy</a>
       </nav>
       <div class="version">V.1.0.0.0</div>
     </aside>
@@ -131,11 +131,11 @@
         </div>
 
         <!-- Subscription Card -->
-        <div class="card">
-          <h3>Subscription & Payment</h3>
-          <p>Manage your subscription and payment method.</p>
-          <a href="/setting/subscription.html" class="btn">Go to subscription</a>
-        </div>
+          <div class="card">
+            <h3>Subscription & Payment</h3>
+            <p>Manage your subscription and payment method.</p>
+            <a href="/templates/subscription.html" class="btn">Go to subscription</a>
+          </div>
 
         <!-- Account Card -->
         <div class="card" id="account">
@@ -153,7 +153,7 @@
 
   <script>
     const raw = localStorage.getItem('aizeeno_user');
-    if (!raw) { location.href = '../auth/login.html'; }
+    if (!raw) { location.href = '/templates/login.html'; }
     const user = JSON.parse(raw || '{}');
     document.getElementById('displayName').value = user.name || user.username || '';
 
@@ -195,13 +195,13 @@
       if (!confirm('Remove local account data? This will sign you out on this device.')) return;
       localStorage.removeItem('aizeeno_user');
       alert('Local account removed.');
-      location.href = '../auth/login.html';
+      location.href = '/templates/login.html';
     });
 
     document.getElementById('logoutTop').addEventListener('click', e => {
       e.preventDefault();
       localStorage.removeItem('aizeeno_user');
-      location.href = '../auth/login.html';
+      location.href = '/templates/login.html';
     });
   </script>
 </body>

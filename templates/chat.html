@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aizeeno Chat</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background:#fff;
+  color:#000;
+  min-height:100vh;
+  display:flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width:250px;
+  background:#f5f5f5;
+  border-right:1px solid #ddd;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  height:100vh;
+}
+
+.sidebar h2 {
+  font-size:1.1rem;
+  color:#333;
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.sidebar button {
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  background:#e0e0e0;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+
+.sidebar button:hover {
+  background:#cbb3ff;
+  color:#fff;
+}
+
+/* Chat area */
+.chat-area {
+  flex:1;
+  position:relative;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Scrollable Chat Container */
+.chat-container {
+  flex:1;
+  padding:20px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  background:#ffffff;
+  margin-bottom:70px; /* space for chat bar */
+}
+
+.message {
+  max-width:70%;
+  padding:12px 18px;
+  border-radius:20px;
+  font-size:15px;
+  line-height:1.4;
+  word-wrap:break-word;
+  text-align:center;
+  animation:fadeInUp 0.4s ease forwards;
+}
+
+.user-msg {
+  align-self:flex-end;
+  background:#007bff;
+  color:#fff;
+  border-bottom-right-radius:5px;
+}
+
+.ai-msg {
+  align-self:flex-start;
+  background:#eaeaea;
+  color:#333;
+  border-bottom-left-radius:5px;
+}
+
+/* Chat bar overlay */
+.chat-bar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  max-width:720px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:40px;
+  padding:12px 18px;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.12);
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  transition:all 0.3s ease;
+}
+
+/* Centered at start */
+.chat-bar.centered {
+  top:50%;
+  transform:translate(-50%, -50%);
+}
+
+/* Bottom after sending message */
+.chat-bar.bottomed {
+  top:auto;
+  bottom:20px;
+  transform:translateX(-50%);
+}
+
+input {
+  border:none;
+  outline:none;
+  flex:1;
+  font-size:16px;
+  color:#333;
+  padding:12px 15px;
+  background:transparent;
+}
+
+.icon-btn {
+  border:none;
+  background:none;
+  cursor:pointer;
+  padding:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all 0.2s ease;
+}
+
+.icon-btn svg {
+  width:22px;
+  height:22px;
+  stroke:#000;
+  stroke-width:2;
+  fill:none;
+  transition:all 0.2s ease;
+}
+
+.icon-btn:hover svg {
+  stroke:#6c63ff;
+  transform:scale(1.1);
+}
+
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(15px);}
+  to { opacity:1; transform:translateY(0);}
+}
+
+/* Scrollbar */
+.chat-container::-webkit-scrollbar {
+  width:10px;
+}
+.chat-container::-webkit-scrollbar-thumb {
+  background:#cbb3ff;
+  border-radius:10px;
+}
+.chat-container::-webkit-scrollbar-track {
+  background:#f0f0f0;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Chats</h2>
+  <button id="newChatBtnSidebar">New Chat</button>
+  <button>Saved</button>
+  <button>Settings</button>
+</div>
+
+<div class="chat-area">
+  <div class="chat-container" id="chatContainer"></div>
+
+  <!-- Chat bar -->
+  <div class="chat-bar centered" id="chatBar">
+    <input type="text" id="userInput" placeholder="Ask anything..." autocomplete="off">
+    <button class="icon-btn" id="sendBtn">
+      <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const chatContainer = document.getElementById('chatContainer');
+const chatBar = document.getElementById('chatBar');
+const sendBtn = document.getElementById('sendBtn');
+const userInput = document.getElementById('userInput');
+const newChatBtnSidebar = document.getElementById('newChatBtnSidebar');
+
+// Send message function
+function sendMessage() {
+  const text = userInput.value.trim();
+  if(!text) return;
+
+  // Move chat bar to bottom if it's centered
+  if(chatBar.classList.contains('centered')) {
+    chatBar.classList.remove('centered');
+    chatBar.classList.add('bottomed');
+  }
+
+  // Add user message
+  const userMsg = document.createElement('div');
+  userMsg.className = 'message user-msg';
+  userMsg.textContent = text;
+  chatContainer.appendChild(userMsg);
+
+  // Optional AI response placeholder
+  const aiMsg = document.createElement('div');
+  aiMsg.className = 'message ai-msg';
+  aiMsg.textContent = "AI is thinking...";
+  chatContainer.appendChild(aiMsg);
+
+  // Scroll to bottom
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  // Clear input
+  userInput.value = "";
+}
+
+// Send via button
+sendBtn.addEventListener('click', sendMessage);
+
+// Send via Enter key
+userInput.addEventListener('keydown', e => {
+  if(e.key === 'Enter') sendMessage();
+});
+
+// Start a new chat
+newChatBtnSidebar.addEventListener('click', () => {
+  chatContainer.innerHTML = ""; // clear messages
+  userInput.value = "";
+  chatBar.classList.remove('bottomed');
+  chatBar.classList.add('centered');
+  userInput.focus();
+});
+</script>
+
+</body>
+</html>
