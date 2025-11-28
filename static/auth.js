@@ -1,6 +1,7 @@
 // auth.js - handles signup and login and talks to the backend
 
-const API_BASE = (typeof BACKEND_BASE !== 'undefined') ? BACKEND_BASE : '';
+// Default to local backend if a global BACKEND_BASE isn't provided by the page
+const API_BASE = (typeof BACKEND_BASE !== 'undefined') ? BACKEND_BASE : 'http://127.0.0.1:5000';
 
 async function postJson(url, body){
   const resp = await fetch(url, {
