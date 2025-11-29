@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Settings — Aizeeno</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --primary: #000;
@@ -25,7 +26,7 @@
     }
 
     a { text-decoration: none; color: var(--primary); }
-    a:hover { color: var(--primary); opacity: 0.8; }
+    a:hover { opacity: 0.8; }
 
     /* Topbar */
     .topbar {
@@ -37,37 +38,68 @@
       border-bottom: 1px solid #eee;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .topbar .logo { font-weight: 700; font-size: 20px; color: var(--primary); }
+    .topbar .logo {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--primary);
+    }
 
     /* Layout */
-    .layout { display: flex; gap: 24px; max-width: 1200px; margin: 20px auto; padding: 0 20px; }
-    .sidebar { width: 220px; background: transparent; padding: 20px; border-radius: var(--radius); }
+    .layout {
+      display: flex;
+      gap: 24px;
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 20px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      padding: 20px;
+    }
+
     .sidebar nav a {
       display: block;
       padding: 10px 14px;
       color: var(--muted);
       border-radius: var(--radius);
       margin-bottom: 8px;
-      transition: all 0.2s;
+      transition: 0.2s;
     }
-    .sidebar nav a:hover { background: var(--hover-bg); color: var(--primary); }
-    .sidebar nav a.active { font-weight: 600; background: rgba(0,0,0,0.05); }
 
-    .version { margin-top: 18px; color: #999; font-size: 12px; }
+    .sidebar nav a:hover {
+      background: var(--hover-bg);
+      color: var(--primary);
+    }
 
+    .sidebar nav a.active {
+      font-weight: 600;
+      background: rgba(0,0,0,0.06);
+      color: var(--primary);
+    }
+
+    .version {
+      margin-top: 18px;
+      color: #999;
+      font-size: 12px;
+    }
+
+    /* Content */
     .main { flex: 1; }
+    .container { padding: 20px; }
 
     /* Cards */
-    .container { padding: 20px; }
     .card {
       background: var(--card-bg);
       padding: 20px;
       border-radius: var(--radius);
       margin-bottom: 20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
     }
-    .card h3 { margin-bottom: 10px; font-weight: 600; }
-    .card p { margin-bottom: 12px; color: var(--muted); }
+
+    .card h3 { margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: 14px; }
 
     input {
       width: 100%;
@@ -80,49 +112,55 @@
     }
 
     .btn {
-      display: inline-block;
       background: var(--primary);
       color: #fff;
       padding: 10px 16px;
       border-radius: var(--radius);
       border: none;
-      font-size: 14px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: 0.2s;
     }
+
     .btn:hover { background: #222; }
 
-    .btn-danger { background: var(--danger); }
-    .btn-danger:hover { background: #a5001a; }
+    .btn-danger {
+      background: var(--danger);
+      margin-top: 6px;
+    }
+    .btn-danger:hover {
+      background: #a5001a;
+    }
   </style>
 </head>
+
 <body>
+
   <!-- Topbar -->
-   <div class="topbar">
-     <a href="/" class="logo">Aizeeno</a>
-     <a href="#" id="logoutTop">Logout</a>
+  <div class="topbar">
+    <a href="/" class="logo">Aizeeno</a>
+    <a href="#" id="logoutTop">Logout</a>
   </div>
 
   <div class="layout">
+
     <!-- Sidebar -->
     <aside class="sidebar">
       <nav>
-        <a href="/templates/about.html">About Us</a>
-        <a href="/templates/subscription.html">Subscription</a>
-        <a href="/templates/feedback.html">Feedback</a>
-        <a href="/templates/settings.html" class="active">Settings</a>
-         <a href="#account">Account</a>
-        <a href="/templates/terms.html">Terms & Policy</a>
+        <a href="/templates/setting/about.html">About Us</a>
+        <a href="/templates/setting/account.html">Account</a>
+        <a href="/templates/setting/feedback.html">Feedback</a>
+        <a href="/templates/setting/terms.html">Terms & Policy</a>
+        <a href="/templates/setting/settings.html" class="active">Settings</a>
       </nav>
       <div class="version">V.1.0.0.0</div>
     </aside>
 
-    <!-- Main content -->
+    <!-- Main -->
     <main class="main">
       <div class="container">
         <h2>Settings</h2>
 
-        <!-- Profile Card -->
+        <!-- Profile -->
         <div class="card">
           <h3>Profile</h3>
           <p>Edit your display name for the device.</p>
@@ -130,79 +168,99 @@
           <button id="saveProfile" class="btn">Save</button>
         </div>
 
-        <!-- Subscription Card -->
-          <div class="card">
-            <h3>Subscription & Payment</h3>
-            <p>Manage your subscription and payment method.</p>
-            <a href="/templates/subscription.html" class="btn">Go to subscription</a>
-          </div>
+        <!-- Account -->
+        <div class="card">
+          <h3>Account Security</h3>
+          <p>Your account is stored locally on this device.</p>
 
-        <!-- Account Card -->
-        <div class="card" id="account">
-          <h3>Account</h3>
-          <p>Your account is stored on this device only (local).</p>
           <input id="currentPass" type="password" placeholder="Current password" />
           <input id="newPass" type="password" placeholder="New password" />
           <button id="changePass" class="btn">Change Password</button>
-          <br><br>
+
           <button id="removeAccount" class="btn btn-danger">Remove Local Account</button>
         </div>
+
       </div>
     </main>
+
   </div>
 
   <script>
+    /* Load user */
     const raw = localStorage.getItem('aizeeno_user');
-    if (!raw) { location.href = '/templates/login.html'; }
+    if (!raw) location.href = '/templates/login.html';
+
     const user = JSON.parse(raw || '{}');
     document.getElementById('displayName').value = user.name || user.username || '';
 
-    async function apiPost(path, body){
-      try{
-        const r = await fetch(path, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    async function apiPost(path, body) {
+      try {
+        const r = await fetch(path, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
         return await r.json();
-      } catch(e){ return { success: false, error: 'Network error' }; }
+      } catch {
+        return { success: false, error: 'Network error' };
+      }
     }
 
+    /* Save profile */
     document.getElementById('saveProfile').addEventListener('click', async () => {
       const newName = document.getElementById('displayName').value || user.username;
-      const updates = { name: newName };
-      const res = await apiPost('/api/auth/update', { username: user.username, updates });
-      if (res.success){
-        const updated = { ...user, name: newName };
-        localStorage.setItem('aizeeno_user', JSON.stringify(updated));
+
+      const res = await apiPost('/api/auth/update', {
+        username: user.username,
+        updates: { name: newName }
+      });
+
+      if (res.success) {
+        localStorage.setItem('aizeeno_user', JSON.stringify({ ...user, name: newName }));
         alert('Profile updated');
       } else {
-        alert('Update failed: ' + (res.error || 'unknown'));
+        alert('Update failed: ' + res.error);
       }
     });
 
+    /* Change password */
     document.getElementById('changePass').addEventListener('click', async () => {
       const current = document.getElementById('currentPass').value;
       const neu = document.getElementById('newPass').value;
-      if (!current || !neu){ alert('Please fill both fields'); return; }
-      const res = await apiPost('/api/auth/change_password', { username: user.username, current, new: neu });
-      if (res.success){
+
+      if (!current || !neu) return alert('Fill both fields.');
+
+      const res = await apiPost('/api/auth/change_password', {
+        username: user.username,
+        current,
+        new: neu
+      });
+
+      if (res.success) {
         alert('Password changed');
         document.getElementById('currentPass').value = '';
         document.getElementById('newPass').value = '';
       } else {
-        alert('Change failed: ' + (res.error || 'unknown'));
+        alert('Change failed: ' + res.error);
       }
     });
 
+    /* Remove account */
     document.getElementById('removeAccount').addEventListener('click', () => {
-      if (!confirm('Remove local account data? This will sign you out on this device.')) return;
+      if (!confirm('Remove local account?')) return;
+
       localStorage.removeItem('aizeeno_user');
-      alert('Local account removed.');
+      alert('Account removed');
       location.href = '/templates/login.html';
     });
 
+    /* Logout */
     document.getElementById('logoutTop').addEventListener('click', e => {
       e.preventDefault();
       localStorage.removeItem('aizeeno_user');
       location.href = '/templates/login.html';
     });
   </script>
+
 </body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Feedback — Aizeeno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#000; --muted:#666; --bg:#fff; --card-bg:#f9f9f9; --hover-bg:#f0f0f0; --radius:12px; }
+    body { font-family:Inter; margin:0; padding:0; background:var(--bg); color:var(--primary); }
+    a { color:var(--primary); text-decoration:none; }
+
+    .topbar { display:flex; justify-content:space-between; padding:16px 28px; border-bottom:1px solid #eee; }
+    .logo { font-size:20px; font-weight:700; }
+
+    .layout { display:flex; max-width:1200px; padding:0 20px; margin:20px auto; gap:24px; }
+    .sidebar nav a { display:block; padding:10px 14px; border-radius:var(--radius); color:var(--muted); margin-bottom:8px; }
+    .sidebar nav a:hover { background:var(--hover-bg); }
+    .sidebar nav a.active { background:rgba(0,0,0,0.05); font-weight:600; }
+
+    .container { padding:20px; }
+    .card { background:var(--card-bg); padding:20px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(0,0,0,0.05); }
+
+    textarea { width:100%; padding:12px; border:1px solid #ddd; border-radius:var(--radius); height:140px; }
+    .btn { background:var(--primary); color:#fff; padding:10px 16px; border-radius:var(--radius); display:inline-block; cursor:pointer; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="logo">Aizeeno</a>
+  <a href="#" id="logoutTop">Logout</a>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <nav>
+      <a href="/templates/setting/about.html">About Us</a>
+      <a href="/templates/subscription.html">Subscription</a>
+      <a href="/templates/setting/feedback.html" class="active">Feedback</a>
+      <a href="/templates/settings.html">Settings</a>
+      <a href="/templates/setting/account.html">Account</a>
+      <a href="/templates/terms.html">Terms & Policy</a>
+    </nav>
+    <div class="version">V.1.0.0.0</div>
+  </aside>
+
+  <main class="main">
+    <div class="container">
+      <div class="card">
+        <h2>Feedback</h2>
+        <p>Tell us what to improve.</p>
+        <textarea id="fbText" placeholder="Write your feedback here..."></textarea>
+        <br><br>
+        <button class="btn" id="sendFb">Send</button>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script>
+document.getElementById('sendFb').onclick = () => {
+  const t = document.getElementById('fbText').value.trim();
+  if(!t) return alert("Write something first.");
+  alert("Feedback sent!");
+  document.getElementById('fbText').value = "";
+};
+document.getElementById('logoutTop').onclick = () => {
+  localStorage.removeItem('aizeeno_user');
+  location.href = '/templates/login.html';
+};
+</script>
+
+</body>
+</html>

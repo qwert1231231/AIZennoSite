@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us — Aizeeno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #000;
+      --muted: #555;
+      --bg: #fff;
+      --card-bg: #f9f9f9;
+      --hover-bg: #f0f0f0;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--primary);
+    }
+
+    a { text-decoration: none; color: var(--primary); }
+    a:hover { opacity: 0.8; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .layout {
+      display: flex;
+      gap: 24px;
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 20px;
+    }
+
+    .sidebar {
+      width: 220px;
+      padding: 20px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      transition: 0.2s;
+    }
+
+    .sidebar nav a:hover {
+      background: var(--hover-bg);
+      color: var(--primary);
+    }
+
+    .sidebar nav a.active {
+      background: rgba(0,0,0,0.06);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .version {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .main { flex: 1; }
+    .container { padding: 20px; }
+
+    .card {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    h2, h3 { margin-top: 0; }
+  </style>
+</head>
+
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <a href="/" class="logo">Aizeeno</a>
+    <a href="#" id="logoutTop">Logout</a>
+  </div>
+
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <a href="/templates/setting/about.html" class="active">About Us</a>
+        <a href="/templates/setting/account.html">Account</a>
+        <a href="/templates/setting/feedback.html">Feedback</a>
+        <a href="/templates/setting/terms.html">Terms & Policy</a>
+        <a href="/templates/setting/settings.html">Settings</a>
+      </nav>
+      <div class="version">V.1.0.0.0</div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <div class="container">
+
+        <div class="card">
+          <h2>About Aizeeno</h2>
+
+          <p>
+            Aizeeno was created with one clear mission: to make advanced artificial intelligence available to everyone,
+            in a clean, fast, reliable, and powerful platform. What started as a personal project slowly began to grow
+            into a full system — one built with clarity, security, and stability in mind.
+          </p>
+
+          <p>
+            This project took <strong>over 7 months</strong> to build from the ground up: planning the structure,
+            designing the user interface, writing the backend logic, optimizing speed, and testing features over and over
+            again to make sure everything works exactly the way it should. Nothing here was rushed. Every button, every
+            page, every line of code was placed with careful attention to detail.
+          </p>
+
+          <h3>Our Vision</h3>
+          <p>
+            Aizeeno isn’t just a normal AI platform — it is a constantly evolving intelligence system designed to adapt
+            and improve. The goal is to push AI beyond the usual limits, giving users a tool that feels fast, helpful,
+            and able to truly understand what you want instead of just answering basic questions.
+          </p>
+
+          <p>
+            We believe AI should be:
+            <ul>
+              <li>Powerful — capable of handling complex tasks</li>
+              <li>Simple — easy for anyone to use</li>
+              <li>Fast — built for performance and instant response</li>
+              <li>Secure — your data stays private</li>
+              <li>Customizable — made to adapt to your needs</li>
+            </ul>
+          </p>
+
+          <h3>How Aizeeno Was Built</h3>
+          <p>
+            Building Aizeeno took a long time — not because it was difficult, but because it had to be done right.
+            During the 7-month development period, every part of the system was improved step by step. That meant:
+          </p>
+
+          <ul>
+            <li>Designing the UI from scratch for clean black-and-white minimalism</li>
+            <li>Developing authentication, account storage, and local data systems</li>
+            <li>Building the chat engine and optimizing how AI responses are handled</li>
+            <li>Creating a modular template structure for scalability</li>
+            <li>Implementing custom API handling for fast communication</li>
+            <li>Designing pages like Settings, Account, Terms, Feedback, and more</li>
+          </ul>
+
+          <p>
+            Every feature has gone through multiple redesigns to make it better, smoother, and more consistent with the
+            rest of the platform. This is not a copied template, not a shortcut system — it is a real, hand-crafted
+            project created with precision.
+          </p>
+
+          <h3>Looking Forward</h3>
+          <p>
+            Aizeeno continues to grow. New tools, smarter AI models, faster processing, and more features will keep
+            coming. What exists now is only the beginning — the foundation for something far more advanced.
+          </p>
+
+          <p>
+            Our commitment is simple:  
+            <strong>to keep improving, keep expanding, and keep delivering AI that actually feels intelligent.</strong>
+          </p>
+
+          <p>
+            Thank you for being part of the journey.
+          </p>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script>
+    document.getElementById('logoutTop').addEventListener('click', e => {
+      e.preventDefault();
+      localStorage.removeItem('aizeeno_user');
+      location.href = '/templates/login.html';
+    });
+  </script>
+
+</body>
+</html>

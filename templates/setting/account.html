@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Account — Aizeeno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#000; --muted:#666; --bg:#fff; --card-bg:#f9f9f9; --hover-bg:#f0f0f0; --danger:#b00020; --radius:12px; }
+    body { font-family:Inter; margin:0; background:#fff; color:#000; }
+
+    .topbar { display:flex; justify-content:space-between; padding:16px 28px; border-bottom:1px solid #eee; }
+    .layout { display:flex; max-width:1200px; margin:20px auto; padding:0 20px; gap:24px; }
+
+    .sidebar nav a { display:block; padding:10px 14px; color:var(--muted); border-radius:var(--radius); margin-bottom:8px; }
+    .sidebar nav a.active { background:rgba(0,0,0,0.05); font-weight:600; }
+
+    .container { padding:20px; }
+    .card { background:var(--card-bg); padding:20px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(0,0,0,0.05); }
+
+    input { width:100%; padding:10px; border:1px solid #ddd; border-radius:var(--radius); margin-bottom:12px; }
+    .btn { background:#000; color:#fff; padding:10px 16px; border-radius:var(--radius); }
+    .btn-danger { background:var(--danger); }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="logo">Aizeeno</a>
+  <a href="#" id="logoutTop">Logout</a>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <nav>
+      <a href="/templates/setting/about.html">About Us</a>
+      <a href="/templates/subscription.html">Subscription</a>
+      <a href="/templates/setting/feedback.html">Feedback</a>
+      <a href="/templates/settings.html">Settings</a>
+      <a href="/templates/setting/account.html" class="active">Account</a>
+      <a href="/templates/terms.html">Terms & Policy</a>
+    </nav>
+    <div class="version">V.1.0.0.0</div>
+  </aside>
+
+  <main class="main">
+    <div class="container">
+
+      <div class="card">
+        <h2>Account Settings</h2>
+        <p>Your account is stored locally on this device.</p>
+
+        <h3>Change Password</h3>
+        <input id="currentPass" type="password" placeholder="Current password" />
+        <input id="newPass" type="password" placeholder="New password" />
+        <button class="btn" id="changePass">Change Password</button>
+
+        <br><br><br>
+
+        <h3>Danger Zone</h3>
+        <button class="btn-danger" id="removeAccount">Remove Local Account</button>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script>
+const raw = localStorage.getItem('aizeeno_user');
+if (!raw) location.href = '/templates/login.html';
+const user = JSON.parse(raw);
+
+async function apiPost(p,b){
+  try{
+    const r = await fetch(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+    return await r.json();
+  }catch(e){ return {success:false,error:'Network Error'} }
+}
+
+document.getElementById('changePass').onclick = async () => {
+  const c = currentPass.value;
+  const n = newPass.value;
+  if(!c||!n) return alert("Fill both fields.");
+  const res = await apiPost('/api/auth/change_password',{ username:user.username, current:c, new:n });
+  alert(res.success ? "Password changed." : "Error: "+res.error);
+};
+
+document.getElementById('removeAccount').onclick = () => {
+  if(!confirm("Remove your local account?")) return;
+  localStorage.removeItem('aizeeno_user');
+  location.href = '/templates/login.html';
+};
+
+document.getElementById('logoutTop').onclick = () => {
+  localStorage.removeItem('aizeeno_user');
+  location.href = '/templates/login.html';
+};
+</script>
+
+</body>
+</html>
